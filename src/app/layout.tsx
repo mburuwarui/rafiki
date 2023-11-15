@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 import "@mantine/core/styles.css";
+import "@mantine/spotlight/styles.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { theme } from "../../theme";
@@ -8,6 +9,8 @@ import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/page";
+import { NextAuthProvider } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,9 +39,12 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider theme={theme}>
-          <TRPCReactProvider cookies={cookies().toString()}>
-            {children}
-          </TRPCReactProvider>
+          <NextAuthProvider>
+            <TRPCReactProvider cookies={cookies().toString()}>
+              <HeaderMegaMenu />
+              {children}
+            </TRPCReactProvider>
+          </NextAuthProvider>
         </MantineProvider>
       </body>
     </html>

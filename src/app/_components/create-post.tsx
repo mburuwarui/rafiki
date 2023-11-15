@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { api } from "~/trpc/react";
 import styles from "../index.module.css";
+import { Button, Input } from "@mantine/core";
 
 export function CreatePost() {
   const router = useRouter();
@@ -25,20 +26,18 @@ export function CreatePost() {
       }}
       className={styles.form}
     >
-      <input
+      <Input
         type="text"
         placeholder="Title"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className={styles.input}
       />
-      <button
+      <Button
         type="submit"
-        className={styles.submitButton}
         disabled={createPost.isLoading}
       >
         {createPost.isLoading ? "Submitting..." : "Submit"}
-      </button>
+      </Button>
     </form>
   );
 }

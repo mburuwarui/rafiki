@@ -1,40 +1,38 @@
 import Link from "next/link";
 
-import { CreatePost } from "~/app/_components/create-post";
-import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
 import styles from "./index.module.css";
+import { CreatePost } from "./_components/create-post";
+import { getServerAuthSession } from "~/server/auth";
 import { Button, Stack, Text } from "@mantine/core";
 import { Welcome } from "./_components/Welcome/Welcome";
-import { ColorSchemeToggle } from "./_components/ColorSchemeToggle/ColorSchemeToggle";
+import { ColorSchemeToggle } from "./_components/ColorSchemeToggle/page";
 
 export default async function Home() {
   const hello = await api.post.hello.query({ text: "from tRPC" });
   const session = await getServerAuthSession();
 
   return (
-    <>
+    <Stack align="center">
       <Welcome />
       <ColorSchemeToggle />
+      <Text>
+        {hello ? hello.greeting : "Loading tRPC query..."}
+      </Text>
 
-      <Stack align="center" mt="xl">
-        <Text>
-          {hello ? hello.greeting : "Loading tRPC query..."}
-        </Text>
-
-        <Text>
-          {session && <span>Logged in as {session.user?.name}</span>}
-        </Text>
-        <Button
-          component={Link}
-          href={session ? "/api/auth/signout" : "/api/auth/signin"}
-        >
-          {session ? "Sign out" : "Sign in"}
-        </Button>
-      </Stack>
+      <Text>
+        {session && <span>Logged in as {session.user?.name}</span>}
+      </Text>
+      <Button
+        variant="outline"
+        component={Link}
+        href={session ? "/api/auth/signout" : "/api/auth/signin"}
+      >
+        {session ? "Sign out" : "Sign in"}
+      </Button>
 
       <CrudShowcase />
-    </>
+    </Stack>
   );
 }
 
@@ -48,11 +46,11 @@ async function CrudShowcase() {
     <div className={styles.showcaseContainer}>
       {latestPost
         ? (
-          <p className={styles.showcaseText}>
+          <Text>
             Your most recent post: {latestPost.name}
-          </p>
+          </Text>
         )
-        : <p className={styles.showcaseText}>You have no posts yet.</p>}
+        : <Text>You have no posts yet.</Text>}
 
       <CreatePost />
     </div>
