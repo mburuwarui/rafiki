@@ -16,8 +16,8 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import Link from "next/link";
-import Image from "next/image";
-import image from "./kiota.png";
+// import Image from "next/image";
+// import image from "./kiota.png";
 import {
   IconBook,
   IconChartPie3,
@@ -29,7 +29,6 @@ import {
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
 import { HeaderActionMenu } from "../HeaderActionMenu/page";
-import { UserButton } from "../UserButton/page";
 import { getServerAuthSession } from "~/server/auth";
 
 const mockdata = [
@@ -87,7 +86,7 @@ export async function HeaderMegaMenu() {
         <ThemeIcon size={34} variant="default" radius="md">
           <item.icon
             style={{ width: rem(22), height: rem(22) }}
-            color="var(--mantine-color-blue-6)"
+            color="var(--mantine-color-lime-6)"
           />
         </ThemeIcon>
         <div>
@@ -106,15 +105,28 @@ export async function HeaderMegaMenu() {
     <Box pb={0}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <Link href="/" className={classes.logo}>
-            <Image
+          <div>
+            {
+              /**<Image
               width={150}
               height={50}
               object-fit="contain"
               src={image.src}
-              alt="Kiotapay"
-            />
-          </Link>
+              alt="Kiotapay
+            />**/
+            }
+            <Text
+              href="/"
+              component={Link}
+              className={classes.logo}
+              size="30px"
+              fw={900}
+              variant="gradient"
+              gradient={{ from: "lime", to: "green" }}
+            >
+              rafiki
+            </Text>
+          </div>
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link href="/" className={classes.link}>
               Home
@@ -134,7 +146,7 @@ export async function HeaderMegaMenu() {
                     </Box>
                     <IconChevronDown
                       style={{ width: rem(16), height: rem(16) }}
-                      color="var(--mantine-color-blue-6)"
+                      color="var(--mantine-color-lime-6)"
                     />
                   </Center>
                 </Link>

@@ -10,7 +10,6 @@ import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/page";
-import { NextAuthProvider } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,17 +33,15 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+          content="minimum-scale=j, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
       <body className={inter.className}>
         <MantineProvider theme={theme}>
-          <NextAuthProvider>
             <TRPCReactProvider cookies={cookies().toString()}>
               <HeaderMegaMenu />
               {children}
             </TRPCReactProvider>
-          </NextAuthProvider>
         </MantineProvider>
       </body>
     </html>

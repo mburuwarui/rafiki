@@ -44,8 +44,8 @@ a {
 
 a:hover {
   color: light-dark(
-    var(--mantine-color-cyan-filled-hover),
-    var(--mantine-color-teal-filled-hover)
+    var(--mantine-color-lime-filled-hover),
+    var(--mantine-color-lime-filled-hover)
   );
 }
 

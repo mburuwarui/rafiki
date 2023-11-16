@@ -95,7 +95,7 @@ export function HeaderActionMenu({
         <ThemeIcon size={34} variant="default" radius="md">
           <item.icon
             style={{ width: rem(22), height: rem(22) }}
-            color="var(--mantine-color-blue-6)"
+            color="var(--mantine-color-lime-6)"
           />
         </ThemeIcon>
         <div>
@@ -117,7 +117,7 @@ export function HeaderActionMenu({
           component={Link}
           href="/bookdemo"
           variant="gradient"
-          gradient={{ from: "pink", to: "yellow" }}
+          gradient={{ from: "lime", to: "green" }}
         >
           Book Demo
         </Button>
@@ -166,7 +166,7 @@ export function HeaderActionMenu({
               </Box>
               <IconChevronDown
                 style={{ width: rem(16), height: rem(16) }}
-                color={theme.colors.blue[6]}
+                color={theme.colors.lime[6]}
               />
             </Center>
           </UnstyledButton>
@@ -214,7 +214,7 @@ export function HeaderActionMenu({
               component={Link}
               href="/bookdemo"
               variant="gradient"
-              gradient={{ from: "pink", to: "yellow" }}
+              gradient={{ from: "lime", to: "green" }}
               onClick={() => {
                 closeDrawer();
               }}

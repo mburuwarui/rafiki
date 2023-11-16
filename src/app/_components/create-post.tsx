@@ -35,6 +35,8 @@ export function CreatePost() {
       <Button
         type="submit"
         disabled={createPost.isLoading}
+        variant="gradient"
+        gradient={{ from: "lime", to: "green" }}
       >
         {createPost.isLoading ? "Submitting..." : "Submit"}
       </Button>

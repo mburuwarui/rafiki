@@ -7,6 +7,12 @@
 .logo {
   padding-top: rem(5px);
   display: flex;
+  @mixin hover {
+    color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-7)
+    );
+  }
 }
 
 .link {
