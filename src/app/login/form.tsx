@@ -11,10 +11,17 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useToggle } from "@mantine/hooks";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 export const LoginForm = ({
   children,
@@ -23,11 +30,14 @@ export const LoginForm = ({
 }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+  const { validate, values, getInputProps } = useForm({
+    initialValues,
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) =>
+        value.length < 7 ? "password must have at least 7 numbers" : null,
+    },
   });
-  const [error, setError] = useState("");
 
   const [type, toggle] = useToggle(["login", "register"]);
 
@@ -36,14 +46,16 @@ export const LoginForm = ({
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) {
+      return;
+    }
     try {
       setLoading(true);
-      setFormValues({ email: "", password: "" });
 
       const res = await signIn("credentials", {
         redirect: false,
-        email: formValues.email,
-        password: formValues.password,
+        email: values.email,
+        password: values.password,
         callbackUrl,
       });
 
@@ -53,17 +65,24 @@ export const LoginForm = ({
       if (!res?.error) {
         router.push(callbackUrl);
       } else {
-        setError("invalid email or password");
+        notifications.show({
+          title: "Error submitting",
+          color: "red",
+          message: "Invalid email or password",
+          autoClose: false,
+          withBorder: true,
+        });
       }
-    } catch (error: any) {
+    } catch (error) {
       setLoading(false);
-      setError(error);
+      notifications.show({
+        title: "Error submitting",
+        color: "red",
+        message: "Invalid email or password",
+        autoClose: false,
+        withBorder: true,
+      });
     }
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
   };
 
   return (
@@ -80,23 +99,16 @@ export const LoginForm = ({
         />
 
         <form onSubmit={onSubmit}>
-          {error && <Text c="red">{error}</Text>}
           <Stack>
             <TextInput
               required
-              type="email"
-              name="email"
-              value={formValues.email}
-              onChange={handleChange}
               placeholder="Email address"
+              {...getInputProps("email")}
             />
             <TextInput
               required
-              type="password"
-              name="password"
-              value={formValues.password}
-              onChange={handleChange}
               placeholder="Password"
+              {...getInputProps("password")}
             />
           </Stack>
           <Group justify="space-between" mt="xl">

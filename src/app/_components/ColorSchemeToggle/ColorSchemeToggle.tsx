@@ -16,7 +16,7 @@ export function ColorSchemeToggle() {
     <Group justify="center">
       <SegmentedControl
         value={colorScheme}
-        /* @ts-expect-error */
+        /* @ts-expect-error: Should expect value */
         onChange={(value: "light" | "dark") => toggleColorScheme(value)}
         data={[
           {
