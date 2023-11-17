@@ -8,10 +8,10 @@ await import("./src/env.mjs");
 const config = {
   images: {
     domains: [
-      "images.unsplash.com", 
-      "www.safaricom.co.ke", 
-      "i.imgur.com", 
-      "images.pexels.com", 
+      "images.unsplash.com",
+      "www.safaricom.co.ke",
+      "i.imgur.com",
+      "images.pexels.com",
       "img.freepik.com",
       "kenyanwallstreet.com",
       "theexchange.africa",
@@ -19,9 +19,10 @@ const config = {
       "disrupt-africa.com",
       "www.businessdailyafrica.com",
       "africanangelacademy.com",
-      "www.techafricanews.com"
+      "www.techafricanews.com",
     ],
   },
+  basePath: "/admin",
 };
 
 export default config;
