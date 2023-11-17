@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 
 export function LogoutForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
 
   return (
     <Center h="80vh">

@@ -1,13 +1,15 @@
 import {
+  ActionIcon,
   Avatar,
   Group,
   Menu,
   rem,
-  UnstyledButton,
+  Text,
   useMantineTheme,
 } from "@mantine/core";
 import {
-  IconChevronDown,
+  IconChevronRight,
+  IconDots,
   IconHeart,
   IconLogout,
   IconMessage,
@@ -17,144 +19,144 @@ import {
   IconSwitchHorizontal,
   IconTrash,
 } from "@tabler/icons-react";
-import classes from "./UserButton.module.css";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
 
-export function UserAvatar() {
+export function UserMenu() {
   const theme = useMantineTheme();
-  const { data: sessionData } = useSession();
-  const [userMenuOpened, setUserMenuOpened] = useState(false);
   return (
-    <Menu
-      width={260}
-      position="bottom-end"
-      transitionProps={{ transition: "pop-top-right" }}
-      onClose={() => setUserMenuOpened(false)}
-      onOpen={() => setUserMenuOpened(true)}
-      withinPortal
-    >
-      <Menu.Target>
-        <UnstyledButton className={classes.user}>
-          <Group gap={4}>
-            <Avatar
-              src={sessionData?.user.image}
-              size="md"
-              radius="xl"
+    <Group justify="center">
+      <Menu
+        withArrow
+        width={300}
+        position="bottom"
+        transitionProps={{ transition: "pop" }}
+        withinPortal
+      >
+        <Menu.Target>
+          <ActionIcon variant="default">
+            <IconDots
+              style={{ width: rem(16), height: rem(16) }}
+              stroke={1.5}
             />
-
-            {
-              /**<div style={{ flex: 1 }}>
-              <Text size="sm" fw={500}>
-                {sessionData && <span>{sessionData.user?.name}</span>}
-              </Text>
-
-              <Text c="dimmed" size="xs">
-                {sessionData && <span>{sessionData.user?.email}</span>}
-              </Text>
-            </div>**/
+          </ActionIcon>
+        </Menu.Target>
+        <Menu.Dropdown>
+          <Menu.Item
+            rightSection={
+              <IconChevronRight
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
             }
+          >
+            <Group>
+              <Avatar
+                radius="xl"
+                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png"
+              />
 
-            <IconChevronDown
-              style={{ width: rem(14), height: rem(14) }}
-              stroke={1.5}
-            />
-          </Group>
-        </UnstyledButton>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item
-          leftSection={
-            <IconHeart
-              style={{ width: rem(16), height: rem(16) }}
-              color={theme.colors.red[6]}
-              stroke={1.5}
-            />
-          }
-        >
-          Liked posts
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconStar
-              style={{ width: rem(16), height: rem(16) }}
-              color={theme.colors.yellow[6]}
-              stroke={1.5}
-            />
-          }
-        >
-          Saved posts
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconMessage
-              style={{ width: rem(16), height: rem(16) }}
-              color={theme.colors.blue[6]}
-              stroke={1.5}
-            />
-          }
-        >
-          Your comments
-        </Menu.Item>
+              <div>
+                <Text fw={500}>Nancy Eggshacker</Text>
+                <Text size="xs" c="dimmed">
+                  neggshaker@mantine.dev
+                </Text>
+              </div>
+            </Group>
+          </Menu.Item>
 
-        <Menu.Label>Settings</Menu.Label>
-        <Menu.Item
-          leftSection={
-            <IconSettings
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-        >
-          Account settings
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconSwitchHorizontal
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-        >
-          Change account
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconLogout
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-          onClick={sessionData ? () => void signOut() : () => void signIn()}
-        >
-          {sessionData ? "Sign out" : "Sign in"}
-        </Menu.Item>
+          <Menu.Divider />
 
-        <Menu.Divider />
+          <Menu.Item
+            leftSection={
+              <IconHeart
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+                color={theme.colors.red[6]}
+              />
+            }
+          >
+            Liked posts
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconStar
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+                color={theme.colors.yellow[6]}
+              />
+            }
+          >
+            Saved posts
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconMessage
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+                color={theme.colors.blue[6]}
+              />
+            }
+          >
+            Your comments
+          </Menu.Item>
 
-        <Menu.Label>Danger zone</Menu.Label>
-        <Menu.Item
-          leftSection={
-            <IconPlayerPause
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-        >
-          Pause subscription
-        </Menu.Item>
-        <Menu.Item
-          color="red"
-          leftSection={
-            <IconTrash
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-        >
-          Delete account
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+          <Menu.Label>Settings</Menu.Label>
+          <Menu.Item
+            leftSection={
+              <IconSettings
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+          >
+            Account settings
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconSwitchHorizontal
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+          >
+            Change account
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconLogout
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+          >
+            Logout
+          </Menu.Item>
+
+          <Menu.Divider />
+
+          <Menu.Label>Danger zone</Menu.Label>
+          <Menu.Item
+            leftSection={
+              <IconPlayerPause
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+          >
+            Pause subscription
+          </Menu.Item>
+          <Menu.Item
+            color="red"
+            leftSection={
+              <IconTrash
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+          >
+            Delete account
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+    </Group>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Group, rem, Text } from "@mantine/core";
-import { Spotlight, spotlight, SpotlightActionData } from "@mantine/spotlight";
+import { Spotlight, spotlight, type SpotlightActionData } from "@mantine/spotlight";
 import {
   IconBookmark,
   IconDashboard,

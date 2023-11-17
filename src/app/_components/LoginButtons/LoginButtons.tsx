@@ -2,8 +2,8 @@
 
 import { Button, Group } from "@mantine/core";
 import { IconBrandDiscord, IconBrandTwitter } from "@tabler/icons-react";
-import { BuiltInProviderType } from "next-auth/providers/index";
-import { ClientSafeProvider, LiteralUnion, signIn } from "next-auth/react";
+import { type BuiltInProviderType } from "next-auth/providers/index";
+import { type ClientSafeProvider, type LiteralUnion, signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 export function LoginButtons(
@@ -14,7 +14,7 @@ export function LoginButtons(
   },
 ) {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/profile";
 
   return (
     <>
