@@ -8,9 +8,6 @@ export const theme = createTheme({
   fontFamilyMonospace: "Monaco, Courier, monospace",
   headings: { fontFamily: "Greycliff CF, sans-serif" },
   colors: {
-    // Add your color
-    deepBlue: ["#E9EDFC", "#C1CCF6", "#99ABF0" /* ... */],
-    // or replace default theme color
     lime: [
       "#f7ffe1",
       "#f0ffcb",
