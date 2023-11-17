@@ -28,9 +28,9 @@ import {
   IconFingerprint,
   IconNotification,
 } from "@tabler/icons-react";
-import classes from "./HeaderMegaMenu.module.css";
-import { ColorSchemeToggle } from "../ColorSchemeToggle/page";
-import { SpotlightSearch } from "../SpotlightSearch/page";
+import classes from "./HeaderActionMenu.module.css";
+import { ColorSchemeToggle } from "../ColorSchemeToggle/ColorSchemeToggle";
+import { SpotlightSearch } from "../SpotlightSearch/SpotlightSearch";
 
 const mockdata = [
   {

@@ -28,7 +28,7 @@ import {
   IconNotification,
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
-import { HeaderActionMenu } from "../HeaderActionMenu/page";
+import { HeaderActionMenu } from "../HeaderActionMenu/HeaderActionMenu";
 import { getServerAuthSession } from "~/server/auth";
 
 const mockdata = [

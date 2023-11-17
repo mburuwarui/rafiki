@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/page";
+import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/HeaderMegaMenu";
 
 const inter = Inter({
   subsets: ["latin"],

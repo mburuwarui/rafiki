@@ -6,7 +6,7 @@ import { CreatePost } from "./_components/create-post";
 import { getServerAuthSession } from "~/server/auth";
 import { Button, Stack, Text } from "@mantine/core";
 import { Welcome } from "./_components/Welcome/Welcome";
-import { ColorSchemeToggle } from "./_components/ColorSchemeToggle/page";
+import { ColorSchemeToggle } from "./_components/ColorSchemeToggle/ColorSchemeToggle";
 
 export default async function Home() {
   const hello = await api.post.hello.query({ text: "from tRPC" });
