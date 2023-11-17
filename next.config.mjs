@@ -22,7 +22,7 @@ const config = {
       "www.techafricanews.com",
     ],
   },
-  basePath: "/",
+  basePath: "",
 };
 
 export default config;
