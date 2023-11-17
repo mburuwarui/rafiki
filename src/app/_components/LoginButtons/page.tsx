@@ -2,17 +2,22 @@
 
 import { Button, Group } from "@mantine/core";
 import { IconBrandDiscord, IconBrandTwitter } from "@tabler/icons-react";
-import { signIn } from "next-auth/react";
+import { Session } from "next-auth";
+import { BuiltInProviderType } from "next-auth/providers/index";
+import { ClientSafeProvider, LiteralUnion, signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 export function LoginButtons(
-  { provider, session }: { provider: any; session: string; },
+  { provider, session }: {
+    provider:
+      | Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>
+      | null;
+    session: Session | null;
+  },
 ) {
-  if (session) {
-    return { redirect: { destination: "/" } };
-  }
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+
 
   return (
     <>

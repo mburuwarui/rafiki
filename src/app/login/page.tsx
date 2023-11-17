@@ -1,4 +1,3 @@
-import { useSearchParams } from "next/navigation";
 import { getProviders } from "next-auth/react";
 import { getServerAuthSession } from "~/server/auth";
 import { LoginButtons } from "../_components/LoginButtons/page";
@@ -9,7 +8,7 @@ export default async function LoginPage() {
   const session = await getServerAuthSession();
 
   return (
-    <LoginForm>
+    <LoginForm >
       <LoginButtons provider={provider} session={session} />
     </LoginForm>
   );

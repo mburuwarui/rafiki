@@ -122,7 +122,7 @@ export async function HeaderMegaMenu() {
               size="30px"
               fw={900}
               variant="gradient"
-              gradient={{ from: "lime", to: "green" }}
+              gradient={{ from: "green", to: "lime" }}
             >
               rafiki
             </Text>
