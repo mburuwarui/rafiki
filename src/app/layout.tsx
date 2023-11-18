@@ -12,6 +12,8 @@ import { cookies } from "next/headers";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/HeaderMegaMenu";
 
+export const dynamic = 'force-dynamic'
+
 const inter = Inter({
   subsets: ["latin"],
 });
