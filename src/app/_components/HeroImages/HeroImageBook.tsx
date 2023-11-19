@@ -25,7 +25,7 @@ export function HeroImageBook() {
           <Text size="lg" className={classes.description}>
             Looking to book a demo with us at Kiotapay? Here, we&apos;ve provided you
             with an outline of the different methods available to get in touch.
-            We're excited about the prospect of showcasing our product through a
+            We&apos;re excited about the prospect of showcasing our product through a
             demo and assisting you in understanding its capabilities better.
           </Text>
         </Container>
