@@ -27,7 +27,7 @@ export function HeroImageBlog() {
             Immerse yourself in a world of valuable insights and information by
             exploring the Kiotapay Blog. Here, we share a diverse range of
             articles, tips, and updates that are designed to enrich your
-            understanding of various topics. Whether it's industry trends, best
+            understanding of various topics. Whether it&apos;s industry trends, best
             practices, or innovative solutions, our blog is your go-to resource
             for staying informed and inspired.
           </Text>
