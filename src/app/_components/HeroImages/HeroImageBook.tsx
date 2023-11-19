@@ -9,6 +9,8 @@ export function HeroImageBook() {
       <Image
         src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFuZHNoYWtlJTIwYnVzaW5lc3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=2070&q=60"
         alt="Background Image"
+        placeholder="blur"
+        blurDataURL="LIEVvoF4T#IV?bWDb0IV00$cq@NG"
         fill
         style={{ objectFit: "cover" }}
         quality={100}
@@ -23,10 +25,11 @@ export function HeroImageBook() {
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Looking to book a demo with us at Kiotapay? Here, we&apos;ve provided you
-            with an outline of the different methods available to get in touch.
-            We&apos;re excited about the prospect of showcasing our product through a
-            demo and assisting you in understanding its capabilities better.
+            Looking to book a demo with us at Kiotapay? Here, we&apos;ve
+            provided you with an outline of the different methods available to
+            get in touch. We&apos;re excited about the prospect of showcasing
+            our product through a demo and assisting you in understanding its
+            capabilities better.
           </Text>
         </Container>
       </div>

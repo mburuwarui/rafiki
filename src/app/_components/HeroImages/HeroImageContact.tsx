@@ -9,6 +9,8 @@ export function HeroImageContact() {
       <Image
         src="https://img.freepik.com/free-photo/cheerful-woman-using-laptop-smartphone_74855-3220.jpg?w=2070&t=st=1693333559~exp=1693334159~hmac=336b29784ed93c72da5535e2214db9ee578c88ee02552c004bb4c6eb3b7c70b3"
         alt="Background Image"
+        placeholder="blur"
+        blurDataURL="LuOfZ4N^?^rYyWVr$jS#t9ocRQkA"
         fill
         style={{ objectFit: "cover" }}
         quality={100}
