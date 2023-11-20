@@ -14,11 +14,12 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: post.title };
 };
 
-const PostLayout = ({ params }: { params: any }) => {
+const PostLayout = ({ params }: { params: Blog }) => {
   const post = allBlogs.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
 
-   return (
+  
+  return (
     <>
       <BlogLayout props={post}>
         <BlogComponent props={post} />
