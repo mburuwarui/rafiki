@@ -83,7 +83,7 @@ export default async function BlogLayout(
                 {session && (
                   <Avatar
                     src={session.user.image}
-                    alt={session.user.name || "Avatar"}
+                    alt={session.user.name ?? "Avatar"}
                     radius="xl"
                   />
                 )}
@@ -97,7 +97,7 @@ export default async function BlogLayout(
               </Group>
 
               <Text fz="sm" c="dimmed">
-                {props.readingTime ? `${props.readingTime.text}` : ""}
+                {props.readingTime ? `${props.readingTime.text}` : "..."}
               </Text>
             </Group>
             <Divider variant="dotted" />
