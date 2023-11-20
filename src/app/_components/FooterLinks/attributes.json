@@ -1,0 +1,46 @@
+{
+  "title": "Footer with links",
+  "category": "footers",
+  "author": "rtivital",
+  "responsive": true,
+  "dependencies": [
+    "/core/text/",
+    "/core/container/",
+    "/core/action-icon/",
+    "@tabler/icons"
+  ],
+  "props": {
+    "data": [
+      {
+        "title": "About",
+        "links": [
+          { "label": "Features", "link": "/features" },
+          { "label": "Pricing", "link": "/pricing" },
+          { "label": "Support", "link": "/support" },
+          { "label": "Contact Us", "link": "/contacts" }
+        ]
+      },
+      {
+        "title": "Blog",
+        "links": [
+          { "label": "Articles", "link": "/blog" },
+          { "label": "Featured", "link": "/blog" },
+          { "label": "Changelog", "link": "/blog" },
+          { "label": "Releases", "link": "/blog" }
+        ]
+      },
+      {
+        "title": "Community",
+        "links": [
+          { "label": "Book Demo", "link": "/bookdemo" },
+          { "label": "Contact Us", "link": "/contacts" },
+          { "label": "Email newsletter", "link": "/" },
+          { "label": "FAQs", "link": "/support" }
+        ]
+      }
+    ]
+  },
+  "canvas": {
+    "center": false
+  }
+}

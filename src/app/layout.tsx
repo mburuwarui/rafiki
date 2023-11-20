@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
+import "prism-themes/themes/prism-night-owl.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { theme } from "../../theme";
