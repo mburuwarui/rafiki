@@ -4,7 +4,7 @@
  */
 await import("./src/env.mjs");
 
-import { withContentlayer } from 'next-contentlayer'
+import { withContentlayer } from "next-contentlayer";
 
 /** @type {import("next").NextConfig} */
 const config = {

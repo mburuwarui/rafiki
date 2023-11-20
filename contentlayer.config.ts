@@ -48,6 +48,7 @@ export default makeSource({
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,
+      //@ts-ignore
       rehypePrism,
       [
         rehypeAutolinkHeadings,
@@ -58,6 +59,7 @@ export default makeSource({
           },
         },
       ],
+      //@ts-ignore
       toc,
       rehypeAccessibleEmojis,
     ],
