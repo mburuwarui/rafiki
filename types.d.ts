@@ -12,10 +12,16 @@ interface BlogProps {
   category: string;
   /** MDX file body */
   body: MDX;
-  readingTime: json;
+  readingTime: ReadingTime;
   wordCount: number;
   slug: string;
-  children: React.ReactNode;
+}
+
+interface ReadingTime {
+  text: string;
+  minutes: number;
+  time: number;
+  words: number;
 }
 
 interface CommentPost {

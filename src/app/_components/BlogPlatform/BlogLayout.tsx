@@ -19,10 +19,9 @@ import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import { ScrollAffix } from "./ScrollAffix";
-import type { Blog } from "contentlayer/generated";
 
 export default async function BlogLayout(
-  { props, children }: { props: Blog; children: React.ReactNode },
+  { props, children }: { props: BlogProps; children: React.ReactNode },
 ) {
   const session = await getServerAuthSession();
 
@@ -97,7 +96,7 @@ export default async function BlogLayout(
               </Group>
 
               <Text fz="sm" c="dimmed">
-                9 minutess
+                {props.readingTime ? `${props.readingTime.text}` : ""}
               </Text>
             </Group>
             <Divider variant="dotted" />
