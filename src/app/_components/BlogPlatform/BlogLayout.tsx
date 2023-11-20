@@ -19,7 +19,7 @@ import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import { ScrollAffix } from "./ScrollAffix";
-import { Blog } from "contentlayer/generated";
+import type { Blog } from "contentlayer/generated";
 
 export default async function BlogLayout(
   { props, children }: { props: Blog; children: React.ReactNode },

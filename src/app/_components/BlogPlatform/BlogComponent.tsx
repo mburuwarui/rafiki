@@ -1,6 +1,6 @@
 "use client";
 
-import { Blog } from "contentlayer/generated";
+import type { Blog } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";

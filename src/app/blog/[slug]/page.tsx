@@ -1,11 +1,11 @@
-import { allBlogs, Blog } from "contentlayer/generated";
+import { allBlogs, type Blog } from "contentlayer/generated";
 // import { BookDemo } from "~/components/BookDemo/BookDemo";
 import BlogLayout from "~/app/_components/BlogPlatform/BlogLayout";
 import { BlogComponent } from "~/app/_components/BlogPlatform/BlogComponent";
 // import { CommentHtml } from "~/components/CommentHtml/CommentHtml";
 // import { EmailBanner } from "~/components/EmailBanner/EmailBanner";
 
-export const generateStaticParams = async () =>
+export const generateStaticParams = () =>
   allBlogs.map((post) => ({ slug: post.slug }));
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
