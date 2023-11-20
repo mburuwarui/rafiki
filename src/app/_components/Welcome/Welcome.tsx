@@ -23,7 +23,7 @@ export function Welcome() {
         <Anchor href="https://mantine.dev/guides/next/" size="lg">
           this guide
         </Anchor>
-        . To get started edit index.tsx file.
+        . To get started edit page.tsx file.
       </Text>
       <Image
         width={600}
