@@ -97,7 +97,7 @@ export default async function BlogLayout(
               </Group>
 
               <Text fz="sm" c="dimmed">
-                {props.readingTime ? `${props.readingTime.text}` : "..."}
+                {props.readingTime}
               </Text>
             </Group>
             <Divider variant="dotted" />
