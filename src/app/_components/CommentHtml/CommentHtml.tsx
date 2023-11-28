@@ -118,7 +118,7 @@ const organizeComments = (comments: Comment[]) => {
   const commentMap = new Map<number, Comment[]>();
 
   comments.forEach((comment) => {
-    const parentId = comment.commentPost.parentId || 0;
+    const parentId = comment.commentPost.parentId ?? 0;
     if (!commentMap.has(parentId)) {
       commentMap.set(parentId, []);
     }
@@ -140,7 +140,7 @@ export function CommentHtml(
     // optimistic updates
     onMutate: async (newEntry) => {
       await utils.commentPost.getCommentsBySlug.cancel();
-      // @ts-ignore
+      // @ts-expect-error: Should expect undefined
       utils.commentPost.getCommentsBySlug.setData(undefined, (prevEntries) => {
         if (prevEntries) {
           return [newEntry, ...prevEntries];
@@ -157,14 +157,14 @@ export function CommentHtml(
   // Slug Like Toggle
 
   const [likedSlugs, setLikedSlugs] = useLocalStorage<
-    { [key: string]: boolean }
+    Record<string, boolean>
   >({
     key: "liked-slugs",
     defaultValue: {},
   });
 
   const [likeSlugCounts, setLikeSlugCounts] = useLocalStorage<
-    { [key: string]: number | null }
+    Record<string, number | null>
   >({ key: "like-counts", defaultValue: {} });
 
   const likeSlug = api.slugLike.likeSlug.useMutation();
@@ -172,11 +172,11 @@ export function CommentHtml(
   const deleteLikeSlug = api.slugLike.deleteLikeSlug.useMutation();
 
   const handleLikeSlugToggle = async (slug: string) => {
-    const currentLikeSlugStatus = likedSlugs?.[slug] || false;
+    const currentLikeSlugStatus = likedSlugs?.[slug] ?? false;
     const newLikeSlugStatus = !currentLikeSlugStatus;
 
     // Toggle the like status and update the like count
-    const currentLikeSlugCount = likeSlugCounts![slug] || 0;
+    const currentLikeSlugCount = likeSlugCounts![slug] ?? 0;
     const newLikeSlugCount = currentLikeSlugCount +
       (newLikeSlugStatus ? 1 : -1);
 
@@ -227,14 +227,14 @@ export function CommentHtml(
   // Slug Bookmark Toggle
 
   const [bookmarkedSlugs, setBookmarkedSlugs] = useLocalStorage<
-    { [key: string]: boolean }
+    Record<string, boolean>
   >({
     key: "bookmarked-slugs",
     defaultValue: {},
   });
 
   const [bookmarkSlugCounts, setBookmarkSlugCounts] = useLocalStorage<
-    { [key: string]: number | null }
+    Record<string, number | null>
   >({ key: "bookmarked-counts", defaultValue: {} });
 
   const bookmarkSlug = api.slugBookmark.bookmarkSlug.useMutation();
@@ -242,11 +242,11 @@ export function CommentHtml(
   const deleteBookmarkSlug = api.slugBookmark.deleteBookmarkSlug.useMutation();
 
   const handleBookmarkSlugToggle = async (slug: string) => {
-    const currentBookmarkSlugStatus = bookmarkedSlugs?.[slug] || false;
+    const currentBookmarkSlugStatus = bookmarkedSlugs?.[slug] ?? false;
     const newBookmarkSlugStatus = !currentBookmarkSlugStatus;
 
     // Toggle the like status and update the like count
-    const currentBookmarkSlugCount = bookmarkSlugCounts![slug] || 0;
+    const currentBookmarkSlugCount = bookmarkSlugCounts![slug] ?? 0;
     const newBookmarkSlugCount = currentBookmarkSlugCount +
       (newBookmarkSlugStatus ? 1 : -1);
 
@@ -298,7 +298,7 @@ export function CommentHtml(
 
   const [share, setShare] = useState(false);
 
-  const openShare = async (slug: string) => {
+  const openShare = (slug: string) => {
     const baseUrl = "http://localhost:3000/blog/"; // Set your base URL
     setShare(!share);
     modals.open({
@@ -353,7 +353,7 @@ export function CommentHtml(
 
   // Comment Delete Toggle
 
-  const [deleting, setDeleting] = useState<{ [key: number]: boolean }>({});
+  const [deleting, setDeleting] = useState<Record<string, boolean>>({});
 
   const handleCommentDelete =
     (commentId: number) => (event: { preventDefault: () => void }) => {
@@ -368,7 +368,7 @@ export function CommentHtml(
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
         onCancel: () => console.log("Cancel"),
-        onConfirm: async () => {
+        onConfirm: async (): Promise<void> => {
           event.preventDefault();
 
           try {
@@ -412,14 +412,14 @@ export function CommentHtml(
   // Comment Like Toggle
 
   const [likedComments, setLikedComments] = useLocalStorage<
-    { [key: number]: boolean }
+    Record<string, boolean>
   >({
     key: "liked-comments",
     defaultValue: {},
   });
 
   const [likeCounts, setLikeCounts] = useLocalStorage<
-    { [key: number]: number | null }
+    Record<string, number | null>
   >({ key: "like-counts", defaultValue: {} });
 
   const likeComment = api.commentLike.likeComment.useMutation();
@@ -429,11 +429,11 @@ export function CommentHtml(
   const countLikes = api.commentPost.countLikes.useMutation();
 
   const handleLikeToggle = async (commentId: number) => {
-    const currentLikeStatus = likedComments?.[commentId] || false;
+    const currentLikeStatus = likedComments?.[commentId] ?? false;
     const newLikeStatus = !currentLikeStatus;
 
     // Toggle the like status and update the like count
-    const currentLikeCount = likeCounts![commentId] || 0;
+    const currentLikeCount = likeCounts[commentId] ?? 0;
     const newLikeCount = currentLikeCount + (newLikeStatus ? 1 : -1);
 
     // Check if newLikeCount is zero and set it to null if it is
@@ -490,17 +490,19 @@ export function CommentHtml(
         withBorder: true,
       });
 
-      if (!session) signIn();
+      if (!session) {
+        await signIn();
+      }
     }
   };
 
   // Render Nested Comments
 
-  const organizedComments = organizeComments(comment || []);
+  const organizedComments = organizeComments(comment ?? []);
 
   const renderComments = (comments: Comment[]) => {
     return comments.map((comment) => {
-      const replies = organizedComments.get(comment.commentPost.id) || [];
+      const replies = organizedComments.get(comment.commentPost.id) ?? [];
 
       return (
         <div key={comment.commentPost.id}>
@@ -515,7 +517,7 @@ export function CommentHtml(
             <Group>
               <Avatar
                 src={comment.user?.image}
-                alt={comment.user?.name || "Avatar"}
+                alt={comment.user?.name ?? "Avatar"}
                 radius="xl"
               />
 
@@ -530,7 +532,7 @@ export function CommentHtml(
               <div
                 className={classes.content}
                 dangerouslySetInnerHTML={{
-                  __html: comment?.commentPost.comment || "",
+                  __html: comment?.commentPost.comment ?? "",
                 }}
               />
             </TypographyStylesProvider>
@@ -551,7 +553,7 @@ export function CommentHtml(
                 </ActionIcon>
                 <Text fz="xs" c="dimmed">
                   {/** I want to place number of likes for a particular commentId **/}
-                  {likeCounts![comment.commentPost.id]}
+                  {likeCounts[comment.commentPost.id]}
                 </Text>
               </Group>
 
@@ -611,7 +613,7 @@ export function CommentHtml(
               </ActionIcon>
               <Text fz="xs" c="dimmed">
                 {/** I want to place number of likes for a particular commentId **/}
-                {likeSlugCounts![slug]}
+                {likeSlugCounts[slug]}
               </Text>
             </Group>
             <Group gap={0}>
@@ -628,7 +630,7 @@ export function CommentHtml(
               </ActionIcon>
               <Text fz="xs" c="dimmed">
                 {/** I want to place number of likes for a particular commentId **/}
-                {bookmarkSlugCounts![slug]}
+                {bookmarkSlugCounts[slug]}
               </Text>
             </Group>
 
@@ -645,10 +647,10 @@ export function CommentHtml(
           </Group>
         </Card.Section>
         <Card.Section>
-          {renderComments(organizedComments.get(0) || [])}
+          {renderComments(organizedComments.get(0) ?? [])}
         </Card.Section>
       </Card>
-
+      {/** eslint-disable-next-line @typescript-eslint/no-empty-function**/}
       <CommentTiptap
         slug={slug}
         parentId={undefined}

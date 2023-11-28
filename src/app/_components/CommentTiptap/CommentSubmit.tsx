@@ -2,7 +2,7 @@ import { Button } from "@mantine/core";
 import { getServerAuthSession } from "~/server/auth";
 
 interface Props {
-  visible: any;
+  visible: boolean | undefined;
   parentId?: number;
 }
 

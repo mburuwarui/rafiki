@@ -1,7 +1,7 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import {
   type DefaultSession,
-  DefaultUser,
+  type DefaultUser,
   getServerSession,
   type NextAuthOptions,
 } from "next-auth";
@@ -40,7 +40,8 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({ ...session,
+    session: ({ session, user }) => ({
+      ...session,
       user: {
         ...session.user,
         id: user.id,
@@ -52,7 +53,7 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
     signOut: "/logout",
   },
-  //@ts-ignore
+  //@ts-expect-error: Should expect role
   adapter: DrizzleAdapter(db, mysqlTable),
   providers: [
     DiscordProvider({

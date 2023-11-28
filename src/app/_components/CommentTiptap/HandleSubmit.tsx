@@ -3,7 +3,7 @@ import { Button, Group } from "@mantine/core";
 import type { Dispatch, SetStateAction } from "react";
 import { notifications } from "@mantine/notifications";
 import { signIn } from "next-auth/react";
-import { Editor } from "@tiptap/react";
+import type { Editor } from "@tiptap/react";
 import type { Validate } from "node_modules/@mantine/form/lib/types";
 import { api } from "~/trpc/react";
 import type { Session } from "next-auth";
@@ -37,7 +37,7 @@ export function HandleSubmit(
     // optimistic updates
     onMutate: async (newEntry) => {
       await utils.commentPost.getCommentsBySlug.cancel();
-      // @ts-ignore
+      // @ts-expect-error: Should expect undefined
       utils.commentPost.getCommentsBySlug.setData(undefined, (prevEntries) => {
         if (prevEntries) {
           return [newEntry, ...prevEntries];
@@ -54,7 +54,7 @@ export function HandleSubmit(
   const handleButtonClick = async () => {
     if (!session) {
       // User is not signed in, so sign them in
-      signIn();
+      await signIn();
     } else {
       // User is signed in, handle sending the comment
       await sendComment();
@@ -83,7 +83,7 @@ export function HandleSubmit(
       console.log("JSON Content:", htmlContent);
 
       await postComment.mutateAsync({
-        comment: htmlContent || "",
+        comment: htmlContent ?? "",
         slug: slug,
         parentId: parentId,
       });
@@ -119,7 +119,7 @@ export function HandleSubmit(
       style={{ marginBottom: "var(--mantine-spacing-md)" }}
       onSubmit={async (event) => {
         event.preventDefault();
-        handleButtonClick();
+        await handleButtonClick();
       }}
     >
       <RichTextEditor editor={editor}>
