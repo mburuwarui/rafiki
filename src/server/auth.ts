@@ -1,7 +1,8 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import {
-  getServerSession,
   type DefaultSession,
+  DefaultUser,
+  getServerSession,
   type NextAuthOptions,
 } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
@@ -22,13 +23,14 @@ declare module "next-auth" {
       id: string;
       // ...other properties
       // role: UserRole;
+      isAdmin: boolean;
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User extends DefaultUser {
+    // ...other properties
+    role: string | null;
+  }
 }
 
 /**
@@ -38,11 +40,11 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
+    session: ({ session, user }) => ({ ...session,
       user: {
         ...session.user,
         id: user.id,
+        isAdmin: user.role === "admin",
       },
     }),
   },
@@ -50,6 +52,7 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
     signOut: "/logout",
   },
+  //@ts-ignore
   adapter: DrizzleAdapter(db, mysqlTable),
   providers: [
     DiscordProvider({

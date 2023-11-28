@@ -7,8 +7,13 @@ import Link from "next/link";
 import { Button, Image } from "@mantine/core";
 import Video from "./video";
 import type { Url } from "next/dist/shared/lib/router/router";
+import { CommentHtml } from "../CommentHtml/CommentHtml";
+import { CommentTiptap } from "../CommentTiptap/CommentTiptap";
+import type { Session } from "next-auth";
 
-export function BlogComponent({ props }: { props: Blog }) {
+export function BlogComponent(
+  { props, session }: { props: Blog; session: Session | null },
+) {
   // Define your custom MDX components.
   const mdxComponents: MDXComponents = {
     // Override the default <a> element to use the next/link component.
@@ -25,15 +30,16 @@ export function BlogComponent({ props }: { props: Blog }) {
       />
     ),
     Video,
-    /**CommentHtml: () => (
+    CommentTiptap,
+    CommentHtml: () => (
       <CommentHtml
-        slug={blog.slug}
-        setReplying={() => {}}
+        slug={props.slug}
         commentId={0}
         replyCount={0}
+        session={session}
       />
     ),
-    BookDemo: () => <BookDemo />,
+    /**BookDemo: () => <BookDemo />,
     EmailBanner: () => <EmailBanner />,**/
   };
 

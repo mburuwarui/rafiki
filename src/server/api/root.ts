@@ -1,4 +1,11 @@
 import { postRouter } from "~/server/api/routers/post";
+import { bookdemoRouter } from "./routers/bookDemo";
+import { contactBookRouter } from "./routers/contactBook";
+import { slugBookmarkRouter } from "./routers/slugBookmark";
+import { slugLikeRouter } from "./routers/slugLike";
+import { commentLikeRouter } from "./routers/commentLike";
+import { commentPostRouter } from "./routers/commentPost";
+import { newsletterRouter } from "./routers/newsLetter";
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -8,6 +15,13 @@ import { createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  bookDemo: bookdemoRouter,
+  contactBook: contactBookRouter,
+  commentPost: commentPostRouter,
+  newsLetter: newsletterRouter,
+  commentLike: commentLikeRouter,
+  slugLike: slugLikeRouter,
+  slugBookmark: slugBookmarkRouter,
 });
 
 // export type definition of API

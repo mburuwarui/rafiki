@@ -1,0 +1,29 @@
+.comment {
+  padding: var(--mantine-spacing-lg) var(--mantine-spacing-xl);
+  padding-right: 3px;
+}
+
+.body {
+  padding-left: rem(54px);
+  padding-right: rem(50px);
+  padding-top: var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.content {
+  & > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.like svg {
+  fill: var(--mantine-color-red-filled);
+}
+
+.bookmark svg {
+  fill: var(--mantine-color-teal-filled);
+}
+
+.share svg {
+  fill: var(--mantine-color-orange-filled);
+}

@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
+import "@mantine/tiptap/styles.css";
 import "prism-themes/themes/prism-night-owl.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
@@ -12,8 +13,10 @@ import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { HeaderMegaMenu } from "./_components/HeaderMegaMenu/HeaderMegaMenu";
+import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from "@mantine/notifications";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,10 +45,13 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider theme={theme}>
+          <ModalsProvider>
             <TRPCReactProvider cookies={cookies().toString()}>
+              <Notifications />
               <HeaderMegaMenu />
               {children}
             </TRPCReactProvider>
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>
