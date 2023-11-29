@@ -356,7 +356,7 @@ export function CommentHtml(
   const [deleting, setDeleting] = useState<Record<string, boolean>>({});
 
   const handleCommentDelete =
-    (commentId: number) => async (event: { preventDefault: () => void }) => {
+    (commentId: number) => (event: { preventDefault: () => void }) => {
       event.preventDefault();
       modals.openConfirmModal({
         title: "Please confirm your action",
@@ -368,7 +368,7 @@ export function CommentHtml(
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
         onCancel: () => console.log("Cancel"),
-        onConfirm: async () => {
+        onConfirm: () => {
           event.preventDefault();
 
           try {
@@ -377,7 +377,7 @@ export function CommentHtml(
               [commentId]: true,
             }));
 
-            await deleteComment.mutateAsync({
+            deleteComment.mutateAsync({
               id: commentId,
             });
             notifications.show({
