@@ -368,7 +368,7 @@ export function CommentHtml(
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
         onCancel: () => console.log("Cancel"),
-        onConfirm:async () => {
+        onConfirm: async (): Promise<void> => {
           event.preventDefault();
 
           try {
@@ -405,6 +405,7 @@ export function CommentHtml(
               [commentId]: false,
             }));
           }
+          return;
         },
       });
     };
