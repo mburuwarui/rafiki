@@ -355,60 +355,58 @@ export function CommentHtml(
 
   const [deleting, setDeleting] = useState<Record<string, boolean>>({});
 
-  const handleCommentDelete =
-    (commentId: number): React.MouseEventHandler<HTMLButtonElement> =>
-    (event) => {
-      event.preventDefault();
-      modals.openConfirmModal({
-        title: "Please confirm your action",
-        centered: true,
-        children: (
-          <Text size="sm">
-            Are you sure you want to delete your comment?
-          </Text>
-        ),
-        labels: { confirm: "Confirm", cancel: "Cancel" },
-        onCancel: () => console.log("Cancel"),
-        onConfirm: async () => {
-          event.preventDefault();
+  const handleCommentDelete = (commentId: number) => {
+    event.preventDefault();
+    modals.openConfirmModal({
+      title: "Please confirm your action",
+      centered: true,
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete your comment?
+        </Text>
+      ),
+      labels: { confirm: "Confirm", cancel: "Cancel" },
+      onCancel: () => console.log("Cancel"),
+      onConfirm: async () => {
+        event.preventDefault();
 
-          try {
-            setDeleting((prevVisibility) => ({
-              ...prevVisibility,
-              [commentId]: true,
-            }));
+        try {
+          setDeleting((prevVisibility) => ({
+            ...prevVisibility,
+            [commentId]: true,
+          }));
 
-            await deleteComment.mutateAsync({
-              id: commentId,
-            });
-            notifications.show({
-              title: "Successfully deleted",
-              color: "green",
-              message: "You can write a new comment",
-              withBorder: true,
-            });
+          await deleteComment.mutateAsync({
+            id: commentId,
+          });
+          notifications.show({
+            title: "Successfully deleted",
+            color: "green",
+            message: "You can write a new comment",
+            withBorder: true,
+          });
 
-            console.log("Confirmed");
-          } catch (error) {
-            // Handle errors
-            console.error("Error submitting:", error);
-            notifications.show({
-              title: "Error submitting",
-              color: "red",
-              message:
-                "An error occurred while submitting. Please try again later.",
-              withBorder: true,
-            });
-          } finally {
-            // Perform cleanup
-            setDeleting((prevVisibility) => ({
-              ...prevVisibility,
-              [commentId]: false,
-            }));
-          }
-        },
-      });
-    };
+          console.log("Confirmed");
+        } catch (error) {
+          // Handle errors
+          console.error("Error submitting:", error);
+          notifications.show({
+            title: "Error submitting",
+            color: "red",
+            message:
+              "An error occurred while submitting. Please try again later.",
+            withBorder: true,
+          });
+        } finally {
+          // Perform cleanup
+          setDeleting((prevVisibility) => ({
+            ...prevVisibility,
+            [commentId]: false,
+          }));
+        }
+      },
+    });
+  };
 
   // Comment Like Toggle
 
