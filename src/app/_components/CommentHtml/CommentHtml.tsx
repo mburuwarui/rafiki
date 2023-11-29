@@ -356,7 +356,6 @@ export function CommentHtml(
   const [deleting, setDeleting] = useState<Record<string, boolean>>({});
 
   const handleCommentDelete = (commentId: number) => {
-    event.preventDefault();
     modals.openConfirmModal({
       title: "Please confirm your action",
       centered: true,
@@ -368,8 +367,6 @@ export function CommentHtml(
       labels: { confirm: "Confirm", cancel: "Cancel" },
       onCancel: () => console.log("Cancel"),
       onConfirm: async () => {
-        event.preventDefault();
-
         try {
           setDeleting((prevVisibility) => ({
             ...prevVisibility,
