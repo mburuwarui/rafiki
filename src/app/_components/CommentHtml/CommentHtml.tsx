@@ -368,45 +368,47 @@ export function CommentHtml(
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
         onCancel: () => console.log("Cancel"),
-        onConfirm: async (): Promise<void> => {
-          event.preventDefault();
+        onConfirm: () =>
+          new Promise<void>(async (resolve, reject) => {
+            event.preventDefault();
 
-          try {
-            setDeleting((prevVisibility) => ({
-              ...prevVisibility,
-              [commentId]: true,
-            }));
+            try {
+              setDeleting((prevVisibility) => ({
+                ...prevVisibility,
+                [commentId]: true,
+              }));
 
-            await deleteComment.mutateAsync({
-              id: commentId,
-            });
-            notifications.show({
-              title: "Successfully deleted",
-              color: "green",
-              message: "You can write a new comment",
-              withBorder: true,
-            });
+              await deleteComment.mutateAsync({
+                id: commentId,
+              });
+              notifications.show({
+                title: "Successfully deleted",
+                color: "green",
+                message: "You can write a new comment",
+                withBorder: true,
+              });
 
-            console.log("Confirmed");
-          } catch (error) {
-            // Handle errors
-            console.error("Error submitting:", error);
-            notifications.show({
-              title: "Error submitting",
-              color: "red",
-              message:
-                "An error occurred while submitting. Please try again later.",
-              withBorder: true,
-            });
-          } finally {
-            // Perform cleanup
-            setDeleting((prevVisibility) => ({
-              ...prevVisibility,
-              [commentId]: false,
-            }));
-          }
-          return;
-        },
+              console.log("Confirmed");
+              resolve(); // Resolve the Promise when the operation is successful
+            } catch (error) {
+              // Handle errors
+              console.error("Error submitting:", error);
+              notifications.show({
+                title: "Error submitting",
+                color: "red",
+                message:
+                  "An error occurred while submitting. Please try again later.",
+                withBorder: true,
+              });
+              reject(error); // Reject the Promise if an error occurs
+            } finally {
+              // Perform cleanup
+              setDeleting((prevVisibility) => ({
+                ...prevVisibility,
+                [commentId]: false,
+              }));
+            }
+          }),
       });
     };
 
