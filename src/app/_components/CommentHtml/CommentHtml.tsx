@@ -355,7 +355,7 @@ export function CommentHtml(
 
   const [deleting, setDeleting] = useState<Record<string, boolean>>({});
 
-  const handleCommentDelete = (commentId: number) => () => {
+  const handleCommentDelete = (commentId: number) => {
     modals.openConfirmModal({
       title: "Please confirm your action",
       centered: true,
