@@ -176,7 +176,7 @@ export function CommentHtml(
     const newLikeSlugStatus = !currentLikeSlugStatus;
 
     // Toggle the like status and update the like count
-    const currentLikeSlugCount = likeSlugCounts![slug] ?? 0;
+    const currentLikeSlugCount = likeSlugCounts[slug] ?? 0;
     const newLikeSlugCount = currentLikeSlugCount +
       (newLikeSlugStatus ? 1 : -1);
 
@@ -246,7 +246,7 @@ export function CommentHtml(
     const newBookmarkSlugStatus = !currentBookmarkSlugStatus;
 
     // Toggle the like status and update the like count
-    const currentBookmarkSlugCount = bookmarkSlugCounts![slug] ?? 0;
+    const currentBookmarkSlugCount = bookmarkSlugCounts[slug] ?? 0;
     const newBookmarkSlugCount = currentBookmarkSlugCount +
       (newBookmarkSlugStatus ? 1 : -1);
 
@@ -368,9 +368,7 @@ export function CommentHtml(
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
         onCancel: () => console.log("Cancel"),
-        onConfirm: async (): Promise<void> => {
-          event.preventDefault();
-
+        onConfirm: async () => {
           try {
             setDeleting((prevVisibility) => ({
               ...prevVisibility,
