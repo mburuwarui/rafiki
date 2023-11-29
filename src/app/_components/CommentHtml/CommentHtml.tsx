@@ -572,7 +572,8 @@ export function CommentHtml(
                       mr="xl"
                       variant="transparent"
                       aria-label="Open in a new tab"
-                      onClick={handleCommentDelete(comment.commentPost.id)}
+                      onClick={(event) =>
+                        void handleCommentDelete(comment.commentPost.id)(event)}
                     >
                       <IconTrash />
                     </ActionIcon>
